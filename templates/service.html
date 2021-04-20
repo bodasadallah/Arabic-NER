@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block body %}
+
+<!-- Nav Bar Start -->
+<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a href="index.html" class="navbar-brand">Arabic NER</a>
+    <button
+      type="button"
+      class="navbar-toggler"
+      data-toggle="collapse"
+      data-target="#navbarCollapse"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarCollapse"
+    >
+      <div class="navbar-nav ml-auto">
+        <a href="/" class="nav-item nav-link">Home</a>
+        <a href="/about" class="nav-item nav-link">About</a>
+        <a href="/service" class="nav-item nav-link active">Service</a>
+        <a href="/contact" class="nav-item nav-link">Contact</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Nav Bar End -->
+
+<!--start form-->
+<div class="mt-125">
+  <div class="container">
+    <form action="/service" method="POST">
+      <div class="form-floating">
+        <label for="input">Enter TEXT</label>
+        <textarea
+          class="form-control"
+          id="input"
+          name="input"
+          style="height: 200px"
+        >
+{{inp}}</textarea
+        >
+      </div>
+      <div
+        style="
+          margin: 32px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <input type="submit" value="Submit" class="btn btn-success but" />
+      </div>
+
+      <div class="form-floating">
+        <label for="input">Result</label>
+        <textarea
+          disabled
+          class="form-control"
+          id="output"
+          name="input"
+          style="height: 200px"
+        >
+{{task}}</textarea
+        >
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--end form-->
+
+{% endblock %}

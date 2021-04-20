@@ -1,0 +1,7 @@
+Flask==1.1.2
+googletrans==3.0.0
+numpy==1.20.2
+python-http-client==3.3.2
+tokenizers==0.10.2
+torch==1.8.1
+transformers==4.4.2
