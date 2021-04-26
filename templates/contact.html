@@ -95,11 +95,8 @@
               ></textarea>
               <p class="help-block text-danger"></p>
             </div>
-            <div>
-              <button class="btn" type="submit" id="sendMessageButton">
-                Send Message
-              </button>
-            </div>
+            <form method="post">
+              <input type="button" value="Send Email" onclick="sendEmail()" class="btn" />
           </form>
         </div>
       </div>
@@ -107,5 +104,26 @@
   </div>
 </div>
 <!-- Contact End -->
+
+<script type="text/javascript">
+  function sendEmail() {
+     var name =document.getElementById("name").value;
+     var email =document.getElementById("email").value;
+     var subject =document.getElementById("subject").value;
+     var message_body =document.getElementById("message").value;
+    Email.send({
+      Host: "smtp.gmail.com",
+      Username: "nerarabic@gmail.com",
+      Password: "dodoshi3oa7s3",
+      To: "nerarabic@gmail.com",
+      From: email,
+      Subject: subject,
+      Body: "from "+ name + " : " + message_body,
+    }).then(function (message) {
+      alert("mail sent successfully");
+    });
+  }
+</script>
+
 
 {% endblock %}
