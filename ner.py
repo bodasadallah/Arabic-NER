@@ -219,7 +219,7 @@ class NERecognizer():
 
         # model_info = DataCatalogue.get_dataset_info('NamedEntityRecognition',
         #                                             model_name)
-        model_path = './model'
+        model_path = './model/camel'
         print('path is: ' + model_path)
 
         return NERecognizer(model_path)
