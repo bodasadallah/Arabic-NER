@@ -37,10 +37,13 @@ model = torch.load(destination ,map_location='cpu')
 model.eval()
 
 def predict_sent(sentences):
-    
+
+    sentences = sentences.split('\n')
+    for s in sentences:
+        print( 'HERE', s)
     # input_ids  = TOKENIZER.encode(sentences, return_tensors='pt')
     out = TOKENIZER.batch_encode_plus(sentences, return_tensors='pt',padding=True)
-    
+    result = ''
 
     input_ids = out.input_ids
     attention_mask = out.attention_mask
@@ -68,5 +71,7 @@ def predict_sent(sentences):
 
     for token, label in zip(new_tokens, new_labels):
         print("{}\t{}".format(label, token))
-
+        s = f"({label}: {token})"
+        result = result + s + '\n'
+    return result
 

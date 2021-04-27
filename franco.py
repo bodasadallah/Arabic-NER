@@ -1,7 +1,8 @@
-from googletrans import Translator
-translator = Translator()
+from typing import Text
 import http.client
-# from ner import NERecognizer
+import json
+import re
+import time
 
 
 
