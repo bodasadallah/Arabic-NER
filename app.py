@@ -30,18 +30,25 @@ def test():
     #     sentence = helper.prepare_sentence(inp)
     #     task = test_camel(sentence)
     #     # task = helper.final_result(task)
-    #     return render_template('service.html', task=task, inp=inp)
+    #     return render_template('service.html', task=task, inp=inp, res=res, size=size, links=links)
     # else:
-    #     return render_template('service.html', task='', inp='')
+    #     return render_template('service.html', task='', inp='', res=[], size=0)
     if request.method == "POST":
         inp = request.form['input']
         sentence = helper.prepare_sentence(inp)
         #task = test_camel(sentence)
-        task = predict_sent(sentence)
+        task, labels, tokens= predict_sent(sentence)
+        print('task')
+        print(type(task))
+        #!todo 
+        #3- handling style
+        res = helper.get_separate_entities(labels, tokens)
+        links = helper.get_wiki_urls(res)
         # task = helper.final_result(task)
-        return render_template('service.html', task=task, inp=inp)
+        size = len(res)
+        return render_template('service.html', task=task, inp=inp, res=res, size=size, links=links)
     else:
-        return render_template('service.html', task='', inp='')
+        return render_template('service.html', task='', inp='', res=[], size=0)
 
 @app.route('/faq')
 def faq():

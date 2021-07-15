@@ -33,7 +33,7 @@
   <div class="container">
     <form action="/service" method="POST">
       <div class="form-floating">
-        <label for="input">Enter TEXT</label>
+        <label for="input">ENTER TEXT</label>
         <textarea
           class="form-control"
           id="input"
@@ -53,6 +53,23 @@
       >
         <input type="submit" value="Submit" class="btn btn-success but" />
       </div>
+      <!--result with links to wikedpidea-->
+      <div dir="rtl" style="text-align: right">
+        {% for i in range(0, size) %} {% if (res[i][1] == 0) %}
+        <span style="color: black">{{res[i][0]}}</span>
+        <span> </span>
+        {% else %}
+        <a
+          style="color: black; background-color: tomato; margin: 4px"
+          href="{{links[i]}}"
+          >{{res[i][0]}}</a
+        >
+        <span> </span>
+        {%endif%} {%endfor%}
+      </div>
+      <br />
+      <br />
+      <!--end results of wikedpida-->
 
       <div class="form-floating">
         <label for="input">Result</label>
@@ -61,7 +78,7 @@
           class="form-control"
           id="output"
           name="input"
-          style="height: 200px"
+          style="height: 200px; text-align: right"
         >
 {{task}}</textarea
         >
