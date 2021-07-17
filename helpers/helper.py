@@ -208,7 +208,10 @@ def get_separate_entities(labels, tokens):
             else:
                 b_before = True
                 temp += tokens[i] + ' '
-                print("temp is:" + str(temp))
+                if(i == len(labels)-1):
+                    key_value = (temp[:-1], 1)
+                    res.append(key_value)
+                # print("temp is:" + str(temp))
 
         elif("I-" in curr):
             temp += tokens[i] + ' '
@@ -227,10 +230,10 @@ def get_separate_entities(labels, tokens):
                 res.append(key_value) 
                 temp = ""
                 b_before = False
-    # if(i == len(labels) -1):
-    #     res[temp[:-1]].append(1)
+    
+   
 
-
+    print(res)
     return res 
 
 

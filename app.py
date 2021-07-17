@@ -48,7 +48,7 @@ def test():
         size = len(res)
         return render_template('service.html', task=task, inp=inp, res=res, size=size, links=links)
     else:
-        return render_template('service.html', task='', inp='', res=[], size=0)
+        return render_template('service.html', task='', inp='', res=[], size=0, links=[])
 
 @app.route('/faq')
 def faq():
