@@ -14,17 +14,10 @@ DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 file_url ='https://drive.google.com/uc?id=1Ebvc67HJQ5I9M6LfdzAiOVx5iiyVO9LN'
 file_id = '1Ebvc67HJQ5I9M6LfdzAiOVx5iiyVO9LN'
 
-# check for os to handle file paths
-# if os.name == 'nt':
-#     destination =  DIR_PATH +"\\model\ours\\full_model_v2.pt"
-# else:
-#     destination =  DIR_PATH +"/model/ours/full_model_v2.pt"
+
 
 destination =  DIR_PATH +"/model/ours/full_model_v2.pt"
-# print(destination)
 
-# destination =  DIR_PATH +"/model/camel/pytorch_model.bin"
-# print(destination)
 
 if not os.path.exists(destination):
     
@@ -34,13 +27,6 @@ if not os.path.exists(destination):
 
 TOKENIZER = AutoTokenizer.from_pretrained(MODEL_NAME)
 
-
-#please convert \\ or \ to / before deployment
-
-
-# label_list = list(pd.read_csv(f'{DIR_PATH}/model/camel/label_list.txt', header=None, index_col=0).T)
-# label_map = { v:index for index, v in enumerate(label_list) }
-# inv_label_map = {i: label for i, label in enumerate(label_list)}
 
 
 

@@ -5,23 +5,28 @@
 from helpers.helper import prepare_output
 import numpy as np
 import torch
+import gdown
 import torch.nn as nn
+from helpers.download_model  import download_file_from_google_drive
 import os
 from torch.utils.data import DataLoader, Dataset
 from transformers import BertForTokenClassification, BertTokenizer, AutoTokenizer
 import pandas as pd
 from helpers.helper import en_to_ar, en_to_ar_camel
 
+
+
+file_url = 'https://drive.google.com/uc?id=1L4F757IdKLaV57PnP5s6MZf6aY7SGeMz'
+file_id = '1L4F757IdKLaV57PnP5s6MZf6aY7SGeMz'
+
+
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
-MODEL_NAME = 'aubmindlab/bert-base-arabertv02'
+destination =  DIR_PATH +"/model/camel/pytorch_model.bin"
 
-# from camel_tools.data import DataCatalogue
-
-TOKENIZER = AutoTokenizer.from_pretrained(MODEL_NAME)
-label_list = list(pd.read_csv(f'{DIR_PATH}/model/camel/label_list.txt', header=None, index_col=0).T)
-label_map = { v:index for index, v in enumerate(label_list) }
-inv_label_map = {i: label for i, label in enumerate(label_list)}
-
+if not os.path.exists(destination):
+    
+    download_file_from_google_drive(file_id, destination)
+    gdown.download(file_url, destination, quiet=False)
 
 
 _LABELS = ['B-LOC', 'B-ORG', 'B-PERS', 'B-MISC', 'I-LOC', 'I-ORG', 'I-PERS',
@@ -347,19 +352,5 @@ def test_camel(s):
 
 
 
-if __name__ == '__main__':
-
-    '''Just for Testing'''
-    ner = NERecognizer.pretrained()
-
-    # Predict the labels of a single sentence.
-    # The sentence must be pretokenized by whitespace and punctuation.
-    sentence = 'أنا بحب كلية هندسة عين شمس'.split()
-
-    labels = ner.predict_sentence(sentence)
-    print(labels)
-    print(sentence)
-    # Print the list of token-label pairs
-    print(list(zip(sentence, labels)))
 
 

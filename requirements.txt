@@ -31,3 +31,4 @@ transformers==4.5.0
 typing-extensions==3.7.4.3
 urllib3==1.26.4
 Werkzeug==1.0.1
+camel-tools==1.1.0  

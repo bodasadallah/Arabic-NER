@@ -3,7 +3,7 @@ import http.client
 import json
 import re
 import time
-
+from ner import *
 
 
 # arabic language code 
@@ -39,22 +39,7 @@ def driver(input, itc):
         output = str(res, encoding = 'utf-8')[14+4+len(input):-31]
     return output
     
-# NER = NERecognizer.pretrained()
-# text = []
-# trans = []
-# with open("input.txt", "r") as input:
-#     for line in input.read().splitlines():
-#         text.append(line)
-#
-# for t in text:
-#     translitrated_sent = driver(t,arabic)
-#     sentence = driver(t,arabic).split()
-#     labels = NER.predict_sentence(sentence)
-#     ner = str(list(zip(sentence, labels)))
-#     print(sentence)
-#     trans.append( ''.join (ner) )
-#
-#     trans.append(translitrated_sent)
+
 
 
 
@@ -89,23 +74,6 @@ if __name__ == '__main__':
 
 
 
-# with open("out.txt", "a") as f:
-#     for line in trans:
-#         print(line)
-#         f.write(line+ '\n')
 
-########### NER ####################
-
-
-# franco_sentence = input()
-# sentence = driver(franco_sentence,arabic).split()
-# labels = NER.predict_sentence(sentence)
-
-# Print the list of token-label pairs
-#print(list(zip(sentence, labels)))
-
-
-# regex to extract all arabic letters in string
-#re.sub(r'[^0-9\u0600-\u06ff\u0750-\u077f\ufb50-\ufbc1\ufbd3-\ufd3f\ufd50-\ufd8f\ufd50-\ufd8f\ufe70-\ufefc\uFDF0-\uFDFD]+', ' ', sentence))
 
 
