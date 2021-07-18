@@ -6,11 +6,22 @@ from helpers.helper import prepare_output
 import numpy as np
 import torch
 import torch.nn as nn
+import os
 from torch.utils.data import DataLoader, Dataset
-from transformers import BertForTokenClassification, BertTokenizer
+from transformers import BertForTokenClassification, BertTokenizer, AutoTokenizer
+import pandas as pd
+from helpers.helper import en_to_ar, en_to_ar_camel
 
+DIR_PATH = os.path.dirname(os.path.realpath(__file__))
+MODEL_NAME = 'aubmindlab/bert-base-arabertv02'
 
 # from camel_tools.data import DataCatalogue
+
+TOKENIZER = AutoTokenizer.from_pretrained(MODEL_NAME)
+label_list = list(pd.read_csv(f'{DIR_PATH}/model/camel/label_list.txt', header=None, index_col=0).T)
+label_map = { v:index for index, v in enumerate(label_list) }
+inv_label_map = {i: label for i, label in enumerate(label_list)}
+
 
 
 _LABELS = ['B-LOC', 'B-ORG', 'B-PERS', 'B-MISC', 'I-LOC', 'I-ORG', 'I-PERS',
@@ -298,6 +309,7 @@ class NERecognizer():
         predictions = self._align_predictions(preds.cpu().numpy(),
                                               label_ids.cpu().numpy())
 
+        
         return predictions
 
     def predict_sentence(self, sentence):
@@ -323,9 +335,15 @@ def test_camel(s):
     sentence = s.split()
 
     labels = ner.predict_sentence(sentence)
-    res = prepare_output(sentence, labels)
+    res = ''
     # Print the list of token-label pairs
-    return res
+    for token, label in zip(sentence, labels):
+        if(label == 'O'):
+            continue
+        # print("{}\t{}".format(label, token))
+        s = f"{en_to_ar_camel[label]}     {label}      {token}"
+        res = res + s + '\n'
+    return res , labels , sentence
 
 
 
@@ -339,7 +357,8 @@ if __name__ == '__main__':
     sentence = 'أنا بحب كلية هندسة عين شمس'.split()
 
     labels = ner.predict_sentence(sentence)
-
+    print(labels)
+    print(sentence)
     # Print the list of token-label pairs
     print(list(zip(sentence, labels)))
 

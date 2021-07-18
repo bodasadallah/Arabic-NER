@@ -737,6 +737,74 @@ a:focus {
 }
 
 
+
+
+
+
+/*******************************/
+/********* camel CSS *********/
+/*******************************/
+.camel {
+    position: relative;
+    width: 100%;
+    padding: 45px 0 15px 0;
+}
+
+.camel .camel-item {
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, .1);
+    transition: .3s;
+}
+
+.camel .camel-item:hover {
+    border-color: transparent;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .1);
+}
+
+.camel .camel-item img {
+    max-height: 50px;
+    margin-bottom: 20px;
+}
+
+.camel .camel-item h3 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.camel .camel-item p {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.camel .camel-item a {
+    position: relative;
+    font-size: 16px;
+    color: #0796fe;
+    transition: .3s;
+}
+
+.camel .camel-item a::after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    bottom: -3px;
+    left: 10%;
+    background: #0796fe;
+}
+
+.camel .camel-item:hover a.btn {
+    color: #092a49;
+    background: #1d2434;
+    border-color: #1d2434;
+}
+
 /*******************************/
 /********* Feature CSS *********/
 /*******************************/

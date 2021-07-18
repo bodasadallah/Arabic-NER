@@ -6,6 +6,7 @@ from helpers.helper import en_to_ar
 import torch
 import os
 import gdown
+from helpers import helper
 MODEL_NAME = 'aubmindlab/bert-base-arabertv02'
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -20,8 +21,10 @@ file_id = '1Ebvc67HJQ5I9M6LfdzAiOVx5iiyVO9LN'
 #     destination =  DIR_PATH +"/model/ours/full_model_v2.pt"
 
 destination =  DIR_PATH +"/model/ours/full_model_v2.pt"
-print(destination)
+# print(destination)
 
+# destination =  DIR_PATH +"/model/camel/pytorch_model.bin"
+# print(destination)
 
 if not os.path.exists(destination):
     
@@ -33,6 +36,11 @@ TOKENIZER = AutoTokenizer.from_pretrained(MODEL_NAME)
 
 
 #please convert \\ or \ to / before deployment
+
+
+# label_list = list(pd.read_csv(f'{DIR_PATH}/model/camel/label_list.txt', header=None, index_col=0).T)
+# label_map = { v:index for index, v in enumerate(label_list) }
+# inv_label_map = {i: label for i, label in enumerate(label_list)}
 
 
 
@@ -48,8 +56,8 @@ model.eval()
 def predict_sent(sentences):
 
     sentences = sentences.split('\n')
-    for s in sentences:
-        print( 'HERE', s)
+    # for s in sentences:
+        # print( 'HERE', s)
     # input_ids  = TOKENIZER.encode(sentences, return_tensors='pt')
     out = TOKENIZER.batch_encode_plus(sentences, return_tensors='pt',padding=True)
     result = ''
@@ -60,6 +68,8 @@ def predict_sent(sentences):
     with torch.no_grad():
         model.to('cpu')
         output = model(input_ids,attention_mask)
+
+
 
     label_indices = np.argmax(output[0].to('cpu').numpy(), axis=2)
 
@@ -81,7 +91,7 @@ def predict_sent(sentences):
     for token, label in zip(new_tokens, new_labels):
         if(label == 'O'):
             continue
-        print("{}\t{}".format(label, token))
+        # print("{}\t{}".format(label, token))
         s = f"{en_to_ar[label]}     {label}      {token}"
         result = result + s + '\n'
     return result, new_labels, new_tokens

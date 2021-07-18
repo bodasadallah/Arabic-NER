@@ -2,7 +2,16 @@ from numpy import string_
 from franco import franco_trans
 import re
 
-
+en_to_ar_camel = {
+    'B-LOC' : 'مكان',
+    'B-ORG': 'مؤسسة', 
+    'B-PERS': 'شخص',  
+    'B-MISC': 'معنى بموضوعات متنوعة', 
+    'I-LOC': 'مكان', 
+    'I-ORG': 'مؤسسة', 
+    'I-PERS': 'شحص',   
+    'I-MISC': 'معنى بموضوعات متنوعة', 
+}
 en_to_ar = {
     "B-Artist" : "فنان",
     "I-Artist" :"فنان",
@@ -197,7 +206,7 @@ def get_separate_entities(labels, tokens):
     temp = ""
     key_value = ()
     for i in range(len(labels)):
-        print(res)
+        # print(res)
         curr = labels[i]
         
         if("B-" in curr):
@@ -208,7 +217,7 @@ def get_separate_entities(labels, tokens):
             else:
                 b_before = True
                 temp += tokens[i] + ' '
-                print("temp is:" + str(temp))
+                # print("temp is:" + str(temp))
 
         elif("I-" in curr):
             temp += tokens[i] + ' '
