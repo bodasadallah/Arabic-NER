@@ -38,7 +38,10 @@
           class="form-control"
           id="input"
           name="input"
-          style="height: 200px"
+          style="
+            height: 200px;
+            font-size: 20px;          
+          "
         >
 {{inp}}</textarea
         >
@@ -56,14 +59,24 @@
       <!--result with links to wikedpidea-->
       <div dir="rtl" style="text-align: right">
         {% for i in range(0, size) %} {% if (res[i][1] == 0) %}
-        <span style="color: black">{{res[i][0]}}</span>
+        <span style="color: black; font-size: 20px; font-family: sans-serif"
+          >{{res[i][0]}}</span
+        >
         <span> </span>
         {% else %}
-        <a
-          style="color: black; background-color: tomato; margin: 4px"
-          href="{{links[i]}}"
-          >{{res[i][0]}}</a
+        <div
+          style="
+            background-color: cornflowerblue;
+            padding: 8px;
+            border-radius: 8px;
+            display: inline-block;
+          "
         >
+          <a style="color: black; font-size: 20px" href="{{links[i]}}"
+            >{{res[i][0]}}
+          </a>
+        </div>
+
         <span> </span>
         {%endif%} {%endfor%}
       </div>
@@ -78,7 +91,12 @@
           class="form-control"
           id="output"
           name="input"
-          style="height: 200px; text-align: right"
+          style="
+            height: 200px;
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+          "
         >
 {{task}}</textarea
         >
