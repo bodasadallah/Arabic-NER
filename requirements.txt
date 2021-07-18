@@ -1,5 +1,4 @@
 -f https://download.pytorch.org/whl/torch_stable.html
-camel-tools
 gdown
 certifi==2020.12.5
 chardet==4.0.0
@@ -23,12 +22,13 @@ regex==2021.4.4
 requests==2.25.1
 sacremoses==0.0.44
 six==1.15.0
-tokenizers==0.10.2
+tokenizers==0.8.1rc1
 torch==1.8.1+cpu
 torchaudio==0.8.1
 torchvision==0.9.1+cpu
 tqdm
-transformers<4.7.0
+transformers==3.0.2
+camel-tools==1.1.0
 typing-extensions==3.7.4.3
 urllib3==1.26.4
 Werkzeug==1.0.1
