@@ -1,8 +1,6 @@
 
 """This module contains the CAMeL Tools Named Entity Recognition component.
 """
-
-from helpers.helper import prepare_output
 import numpy as np
 import torch
 import gdown
@@ -12,15 +10,16 @@ import os
 from torch.utils.data import DataLoader, Dataset
 from transformers import BertForTokenClassification, BertTokenizer, AutoTokenizer
 import pandas as pd
-from helpers.helper import en_to_ar, en_to_ar_camel
-
-
-
-file_url = 'https://drive.google.com/uc?id=1L4F757IdKLaV57PnP5s6MZf6aY7SGeMz'
-file_id = '1L4F757IdKLaV57PnP5s6MZf6aY7SGeMz'
+from helpers.helper import en_to_ar_camel
 
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
+
+file_url = 'https://drive.google.com/uc?id=1yQHe3T-N6K8b46NIkR9a9cMyU2Zj7G08'
+file_id = '1yQHe3T-N6K8b46NIkR9a9cMyU2Zj7G08'
+
+
+
 destination =  DIR_PATH +"/model/camel/pytorch_model.bin"
 
 if not os.path.exists(destination):

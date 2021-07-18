@@ -6,7 +6,8 @@ from helpers.helper import en_to_ar
 import torch
 import os
 import gdown
-from helpers import helper
+
+
 MODEL_NAME = 'aubmindlab/bert-base-arabertv02'
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
