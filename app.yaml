@@ -14,6 +14,6 @@ automatic_scaling:
   max_num_instances: 7
   
 resources:
-  cpu: 2
-  memory_gb: 4.7
+  cpu: 1
+  memory_gb: 4
   disk_size_gb: 25
