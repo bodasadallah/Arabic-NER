@@ -41,7 +41,6 @@
           name="options"
           id="Default"
           value="Default"
-          checked
         />
         <label
           class="form-check-label"
@@ -90,6 +89,8 @@
       >
         <input type="submit" value="Submit" class="btn btn-success but" />
       </div>
+      <br>
+      <label style="font-size: 16px;">Model Selected: {{model}}</label>
       <!--result with links to wikedpidea-->
       <div dir="rtl" style="text-align: right">
         {% for i in range(0, size) %} {% if (res[i][1] == 0) %}

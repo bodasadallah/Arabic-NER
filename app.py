@@ -39,7 +39,17 @@ def test():
         print(inp)
         options = request.form.get('options')
         print(options)
-        if(options == "Default"):
+        if(options == "camel"):
+            sentence = helper.prepare_sentence(inp)
+            task, labels , tokens = test_camel(sentence)
+            res = helper.get_separate_entities(labels, tokens)
+            links = helper.get_wiki_urls(res)
+            size = len(res)
+            #task = helper.final_result(task)
+            print(task)
+            return render_template('service.html', task=task, inp=inp, res=res, size=size, links=links, model="Camel model")
+          
+        else:
             sentence = helper.prepare_sentence(inp)
             #task = test_camel(sentence)
             task, labels, tokens= predict_sent(sentence)
@@ -51,18 +61,9 @@ def test():
             links = helper.get_wiki_urls(res)
             # task = helper.final_result(task)
             size = len(res)
-            return render_template('service.html', task=task, inp=inp, res=res, size=size, links=links)
-        else:
-            sentence = helper.prepare_sentence(inp)
-            task, labels , tokens = test_camel(sentence)
-            res = helper.get_separate_entities(labels, tokens)
-            links = helper.get_wiki_urls(res)
-            size = len(res)
-            #task = helper.final_result(task)
-            print(task)
-            return render_template('service.html', task=task, inp=inp, res=res, size=size, links=links)
+            return render_template('service.html', task=task, inp=inp, res=res, size=size, links=links, model="Default model")
     else:
-        return render_template('service.html', task='', inp='', res=[], size=0, links=[])
+        return render_template('service.html', task='', inp='', res=[], size=0, links=[], model="Default model")
 
 @app.route('/faq')
 def faq():
