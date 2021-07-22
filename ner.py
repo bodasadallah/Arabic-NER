@@ -8,6 +8,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, Dataset
 from transformers import BertForTokenClassification, BertTokenizer
+from helpers.helper import en_to_ar_camel
 
 
 # from camel_tools.data import DataCatalogue
@@ -314,6 +315,19 @@ class NERecognizer():
         return self.predict([sentence])[0]
 
 
+# def test_camel(s):
+#     '''Just for Testing'''
+#     ner = NERecognizer.pretrained()
+
+#     # Predict the labels of a single sentence.
+#     # The sentence must be pretokenized by whitespace and punctuation.
+#     sentence = s.split()
+
+#     labels = ner.predict_sentence(sentence)
+#     res = prepare_output(sentence, labels)
+#     # Print the list of token-label pairs
+#     return res
+
 def test_camel(s):
     '''Just for Testing'''
     ner = NERecognizer.pretrained()
@@ -323,11 +337,15 @@ def test_camel(s):
     sentence = s.split()
 
     labels = ner.predict_sentence(sentence)
-    res = prepare_output(sentence, labels)
+    res = ''
     # Print the list of token-label pairs
-    return res
-
-
+    for token, label in zip(sentence, labels):
+        if(label == 'O'):
+            continue
+        # print("{}\t{}".format(label, token))
+        s = f"{en_to_ar_camel[label]}     {label}      {token}"
+        res = res + s + '\n'
+    return res , labels , sentence
 
 if __name__ == '__main__':
 

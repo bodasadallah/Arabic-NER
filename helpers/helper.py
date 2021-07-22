@@ -2,6 +2,16 @@ from numpy import string_
 from franco import franco_trans
 import re
 
+en_to_ar_camel = {
+    'B-LOC' : 'مكان',
+    'B-ORG': 'مؤسسة', 
+    'B-PERS': 'شخص',  
+    'B-MISC': 'معنى بموضوعات متنوعة', 
+    'I-LOC': 'مكان', 
+    'I-ORG': 'مؤسسة', 
+    'I-PERS': 'شحص',   
+    'I-MISC': 'معنى بموضوعات متنوعة', 
+}
 
 en_to_ar = {
     "B-Artist" : "فنان",

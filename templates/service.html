@@ -31,17 +31,51 @@
 <!--start form-->
 <div class="mt-125">
   <div class="container">
+    
     <form action="/service" method="POST">
+      <!--radio buttons -->
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="options"
+          id="Default"
+          value="Default"
+          checked
+        />
+        <label
+          class="form-check-label"
+          for="flexRadioDefault1"
+          style="margin-right: 16px"
+        >
+          Default Model
+        </label>
+        <input
+          class="form-check-input"
+          type="radio"
+          name="options"
+          id="camel"
+          value="camel"
+          style="margin-left: 16px"
+        />
+        <label
+          class="form-check-label"
+          for="flexRadioDefault2"
+          style="margin-left: 32px"
+        >
+          Camel Model
+        </label>
+      </div>
+
+      <br />
+      <!--radio buttons End -->
       <div class="form-floating">
         <label for="input">ENTER TEXT</label>
         <textarea
           class="form-control"
           id="input"
           name="input"
-          style="
-            height: 200px;
-            font-size: 20px;          
-          "
+          style="height: 200px; font-size: 20px"
         >
 {{inp}}</textarea
         >

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect
-# from ner import test_camel
+from ner import test_camel
 from helpers import helper
 from newNer import predict_sent
 
@@ -34,19 +34,33 @@ def test():
     # else:
     #     return render_template('service.html', task='', inp='', res=[], size=0)
     if request.method == "POST":
+        print('yes post')
         inp = request.form['input']
-        sentence = helper.prepare_sentence(inp)
-        #task = test_camel(sentence)
-        task, labels, tokens= predict_sent(sentence)
-        print('task')
-        print(type(task))
-        #!todo 
-        #3- handling style
-        res = helper.get_separate_entities(labels, tokens)
-        links = helper.get_wiki_urls(res)
-        # task = helper.final_result(task)
-        size = len(res)
-        return render_template('service.html', task=task, inp=inp, res=res, size=size, links=links)
+        print(inp)
+        options = request.form.get('options')
+        print(options)
+        if(options == "Default"):
+            sentence = helper.prepare_sentence(inp)
+            #task = test_camel(sentence)
+            task, labels, tokens= predict_sent(sentence)
+            print('task')
+            print(type(task))
+            #!todo 
+            #3- handling style
+            res = helper.get_separate_entities(labels, tokens)
+            links = helper.get_wiki_urls(res)
+            # task = helper.final_result(task)
+            size = len(res)
+            return render_template('service.html', task=task, inp=inp, res=res, size=size, links=links)
+        else:
+            sentence = helper.prepare_sentence(inp)
+            task, labels , tokens = test_camel(sentence)
+            res = helper.get_separate_entities(labels, tokens)
+            links = helper.get_wiki_urls(res)
+            size = len(res)
+            #task = helper.final_result(task)
+            print(task)
+            return render_template('service.html', task=task, inp=inp, res=res, size=size, links=links)
     else:
         return render_template('service.html', task='', inp='', res=[], size=0, links=[])
 
