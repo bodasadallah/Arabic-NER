@@ -10,8 +10,9 @@ MODEL_NAME = 'aubmindlab/bert-base-arabertv02'
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
-file_url ='https://drive.google.com/uc?id=1Ebvc67HJQ5I9M6LfdzAiOVx5iiyVO9LN'
-file_id = '1Ebvc67HJQ5I9M6LfdzAiOVx5iiyVO9LN'
+
+file_url = 'https://drive.google.com/uc?id=19_k6ofac2WoX54W3YT8Sn1BgO17KiRs0'
+file_id = '19_k6ofac2WoX54W3YT8Sn1BgO17KiRs0'
 
 
 
