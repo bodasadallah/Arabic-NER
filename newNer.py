@@ -17,7 +17,7 @@ file_id = '19_k6ofac2WoX54W3YT8Sn1BgO17KiRs0'
 
 
 destination =  DIR_PATH +"/model/ours/full_model_v2.pt"
-print(destination)
+
 
 
 if not os.path.exists(destination):
