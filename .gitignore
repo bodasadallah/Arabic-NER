@@ -4,7 +4,7 @@ helpers/__pycache__/
 .vscode/
 venv/
 model/ours/full_model_v2.pt
-model/camel
+model/camel/pytorch_model.bin
 ner/full_model_v2.pt
 ner/test.txt
 *.pt

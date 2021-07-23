@@ -8,9 +8,24 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, Dataset
 from transformers import BertForTokenClassification, BertTokenizer
+from helpers.download_model  import download_file_from_google_drive
+import os
+import gdown
 from helpers.helper import en_to_ar_camel
 
+DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
+file_url = 'https://drive.google.com/uc?id=1yQHe3T-N6K8b46NIkR9a9cMyU2Zj7G08'
+file_id = '1yQHe3T-N6K8b46NIkR9a9cMyU2Zj7G08'
+
+
+
+destination =  DIR_PATH +"/model/camel/pytorch_model.bin"
+
+if not os.path.exists(destination):
+    
+    download_file_from_google_drive(file_id, destination)
+    gdown.download(file_url, destination, quiet=False)
 # from camel_tools.data import DataCatalogue
 
 
