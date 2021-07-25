@@ -1,0 +1,85 @@
+{% extends "base.html" %} {% block body %}
+
+<!-- Nav Bar Start -->
+<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a href="/" class="navbar-brand">Arabic NER</a>
+    <button
+      type="button"
+      class="navbar-toggler"
+      data-toggle="collapse"
+      data-target="#navbarCollapse"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarCollapse"
+    >
+      <div class="navbar-nav ml-auto">
+        <a href="/" class="nav-item nav-link">Home</a>
+        <a href="/about" class="nav-item nav-link active">About</a>
+        <a href="/service" class="nav-item nav-link">Service</a>
+        <a href="/contact" class="nav-item nav-link">Contact</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Nav Bar End -->
+
+<!-- About Start -->
+<div class="about mt-120">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-4">
+        <div>
+          <div class="about-img-1">
+            <img src="static/img/think.png" alt="Image" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div class="section-header">
+          <p>Learn About Us</p>
+          <h2>What do we support?</h2>
+        </div>
+        <div class="about-text">
+          <p>
+            This website focuses on Arabic Named Entity
+            Recognition(ANER).There's a lack in Arabic NER tools in general and
+            specifically for Franco(transliterated Arabic). This website is a
+            solution for applying NER on text that is arabic or transliterated
+            arabic or mix between them.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div>
+          <div class="about-img-1">
+            <img src="static/img/who.png" alt="Image" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div class="section-header">
+          <p>Learn About Us</p>
+          <h2>Who are we?</h2>
+        </div>
+        <div class="about-text">
+          <p>
+            We are 5 Egyptian students in the faculty of engineering at ASU (CSE
+            department). This website starts as a graduation project to provide
+            solutions to the challenges of Arabic language in NER, and add
+            support for Franco! We created this website under the supervision of
+            Prof.Dr.Ahmed Hassan, the dean of Nile university, and Eng.Sara
+            Abdu, TA at ASU university.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- About End -->
+
+{% endblock %}

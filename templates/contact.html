@@ -1,0 +1,129 @@
+{% extends "base.html" %} {% block body %}
+
+<!-- Nav Bar Start -->
+<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a href="/" class="navbar-brand">Arabic NER</a>
+    <button
+      type="button"
+      class="navbar-toggler"
+      data-toggle="collapse"
+      data-target="#navbarCollapse"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarCollapse"
+    >
+      <div class="navbar-nav ml-auto">
+        <a href="/" class="nav-item nav-link">Home</a>
+        <a href="/about" class="nav-item nav-link">About</a>
+        <a href="/service" class="nav-item nav-link">Service</a>
+        <a href="/contact" class="nav-item nav-link active">Contact</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Nav Bar End -->
+
+<!-- Contact Start -->
+<div class="contact mt-125">
+  <div class="container">
+    <div class="section-header">
+      <p>Get In Touch</p>
+      <h2>Get In Touch For Any Query</h2>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-md-5">
+        
+        <div class="contact-info">
+          <div class="contact-icon">
+            <i class="fa fa-envelope"></i>
+          </div>
+          <div class="contact-text">
+            <h3>Email for Information</h3>
+            <p>nerarabic@gmail.com</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div class="contact-form">
+          <div id="success"></div>
+          <form name="sentMessage" id="contactForm" novalidate="novalidate">
+            <div class="control-group">
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Your Name"
+                required="required"
+                data-validation-required-message="Please enter your name"
+              />
+              <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Your Email"
+                required="required"
+                data-validation-required-message="Please enter your email"
+              />
+              <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+              <input
+                type="text"
+                class="form-control"
+                id="subject"
+                placeholder="Subject"
+                required="required"
+                data-validation-required-message="Please enter a subject"
+              />
+              <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+              <textarea
+                class="form-control"
+                id="message"
+                placeholder="Message"
+                required="required"
+                data-validation-required-message="Please enter your message"
+              ></textarea>
+              <p class="help-block text-danger"></p>
+            </div>
+            <form method="post">
+              <input type="button" value="Send Email" onclick="sendEmail()" class="btn" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Contact End -->
+
+<script type="text/javascript">
+  function sendEmail() {
+     var name =document.getElementById("name").value;
+     var email =document.getElementById("email").value;
+     var subject =document.getElementById("subject").value;
+     var message_body =document.getElementById("message").value;
+    Email.send({
+      Host: "smtp.gmail.com",
+      Username: "nerarabic@gmail.com",
+      Password: "dodoshi3oa7s3",
+      To: "nerarabic@gmail.com",
+      From: email,
+      Subject: subject,
+      Body: "from "+ name + " : " + message_body,
+    }).then(function (message) {
+      alert("mail sent successfully");
+    });
+  }
+</script>
+
+
+{% endblock %}

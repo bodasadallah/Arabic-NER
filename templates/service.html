@@ -1,0 +1,145 @@
+{% extends "base.html" %} {% block body %}
+
+<!-- Nav Bar Start -->
+<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a href="/" class="navbar-brand">Arabic NER</a>
+    <button
+      type="button"
+      class="navbar-toggler"
+      data-toggle="collapse"
+      data-target="#navbarCollapse"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarCollapse"
+    >
+      <div class="navbar-nav ml-auto">
+        <a href="/" class="nav-item nav-link">Home</a>
+        <a href="/about" class="nav-item nav-link">About</a>
+        <a href="/service" class="nav-item nav-link active">Service</a>
+        <a href="/contact" class="nav-item nav-link">Contact</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Nav Bar End -->
+
+<!--start form-->
+<div class="mt-125">
+  <div class="container">
+    
+    <form action="/service" method="POST">
+      <!--radio buttons -->
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="options"
+          id="Default"
+          value="Default"
+        />
+        <label
+          class="form-check-label"
+          for="flexRadioDefault1"
+          style="margin-right: 16px"
+        >
+          Default Model
+        </label>
+        <input
+          class="form-check-input"
+          type="radio"
+          name="options"
+          id="camel"
+          value="camel"
+          style="margin-left: 16px"
+        />
+        <label
+          class="form-check-label"
+          for="flexRadioDefault2"
+          style="margin-left: 32px"
+        >
+          Camel Model
+        </label>
+      </div>
+
+      <br />
+      <!--radio buttons End -->
+      <div class="form-floating">
+        <label for="input">ENTER TEXT</label>
+        <textarea
+          class="form-control"
+          id="input"
+          name="input"
+          style="height: 200px; font-size: 20px"
+        >
+{{inp}}</textarea
+        >
+      </div>
+      <div
+        style="
+          margin: 32px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <input type="submit" value="Submit" class="btn btn-success but" />
+      </div>
+      <br>
+      <label style="font-size: 16px;">Model Selected: {{model}}</label>
+      <!--result with links to wikedpidea-->
+      <div dir="rtl" style="text-align: right">
+        {% for i in range(0, size) %} {% if (res[i][1] == 0) %}
+        <span style="color: black; font-size: 20px; font-family: sans-serif"
+          >{{res[i][0]}}</span
+        >
+        <span> </span>
+        {% else %}
+        <div
+          style="
+            background-color: cornflowerblue;
+            padding: 8px;
+            border-radius: 8px;
+            display: inline-block;
+          "
+        >
+          <a style="color: black; font-size: 20px" href="{{links[i]}}"
+            >{{res[i][0]}}
+          </a>
+        </div>
+
+        <span> </span>
+        {%endif%} {%endfor%}
+      </div>
+      <br />
+      <br />
+      <!--end results of wikedpida-->
+
+      <div class="form-floating">
+        <label for="input">Result</label>
+        <textarea
+          disabled
+          class="form-control"
+          id="output"
+          name="input"
+          style="
+            height: 200px;
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+          "
+        >
+{{task}}</textarea
+        >
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--end form-->
+
+{% endblock %}
