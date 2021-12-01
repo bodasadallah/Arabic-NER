@@ -1,108 +1,91 @@
-
-"""This module contains the CAMeL Tools Named Entity Recognition component.
-"""
-
-from helpers.helper import prepare_output
+from genericpath import exists
+import pandas as pd
 import numpy as np
+from helpers.download_model  import download_file_from_google_drive
+from transformers import AutoConfig, AutoModelForTokenClassification, AutoTokenizer, BertForTokenClassification
+from helpers.helper import en_to_ar
 import torch
-import torch.nn as nn
-from torch.utils.data import DataLoader, Dataset
-# from transformers import BertForTokenClassification, BertTokenizer
-from helpers.helper import en_to_ar_camel
-from camel_tools.ner import NERecognizer
-import os 
-import subprocess
-# from camel_tools.data import DataCatalogue
+import os
+import gdown
+MODEL_NAME = 'aubmindlab/bert-base-arabertv02'
 
-# _LABELS = ['B-LOC', 'B-ORG', 'B-PERS', 'B-MISC', 'I-LOC', 'I-ORG', 'I-PERS',I-MISC', 'O']
+DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
-# path = os.path.expanduser("~/.camel_tools")
-# path  = os.path.expanduser('~')+ '/ANER_DEV/model/camel/'
+file_url ='https://drive.google.com/uc?id=1Ebvc67HJQ5I9M6LfdzAiOVx5iiyVO9LN'
+file_id = '1Ebvc67HJQ5I9M6LfdzAiOVx5iiyVO9LN'
 
 
+parent_folder = DIR_PATH + "/model/ours/"
+destination =  parent_folder+ "full_model_v2.pt"
+print(destination)
 
 
+label_list_url = 'https://drive.google.com/uc?id=1th3j28peQf-asgodeaGo-04aIARN0QoL'
+label_list_dest = parent_folder+ "label_list.txt"
 
-
-
-
-model_path = os.path.dirname(os.path.abspath(__file__))+'/model/camel'
-os.environ["CAMELTOOLS_DATA"] = model_path
-copy_path =  model_path+'/data'
-
-if not os.path.exists('/root/.camel_tools/'):
-        subprocess.call( 'mkdir /root/.camel_tools/', shell=True)
-        print('============= MAKING DIR ===============')
-
-
-
-if not os.path.exists('/root/.camel_tools/data/'):
-    # subprocess.call(  'sudo cp -r '+  copy_path + '/ ' + '/root/.camel_tools/'    , shell=True)
-
-    ## This is the working one 
-    subprocess.call(  'cp -r '+  copy_path + '/ ' + '/root/.camel_tools/'    , shell=True)
-
-
-    print(subprocess.call('echo $CAMELTOOLS_DATA' , shell=True))
-    print(model_path)
-    print(copy_path)
-    print( os.listdir(model_path))
-    print( os.listdir('/root/.camel_tools/'))
-    print( os.listdir('/root/'))
-
-
-ner = NERecognizer.pretrained()
-
-def test_camel(s):
-
-
-
-    # '''Just for Testing'''
-    # if not os.path.exists(path + 'data'):
-    #     os.system('export CAMELTOOLS_DATA=$path')
-    #     os.system('camel_data full')
-        
-    # path  = os.path.expanduser('~')+ '/ANER_DEV/model/camel/'
+if not os.path.exists(destination):
     
+    os.makedirs(parent_folder, exist_ok=True)
+    # download_file_from_google_drive(file_id, destination)
+    gdown.download(file_url, destination, quiet=False)
+    gdown.download(label_list_url, label_list_dest, quiet=False)
     
 
 
-    
-
-        
-        # subprocess.call(  'cp -r '+  model_path + ' ' + '/root/.camel_tools/'    , shell=True)
-
-    # print(subprocess.call('echo $CAMELTOOLS_DATA' , shell=True))
-
-    # print(model_path)
-    # print(copy_path)
+TOKENIZER = AutoTokenizer.from_pretrained(MODEL_NAME)
 
 
-    # print( os.listdir(model_path))
-    # print( os.listdir('/root/.camel_tools/'))
-    # print( os.listdir('/root/'))
-    # print(subprocess.call(['ls', '-l', '/root/'] , shell=True))
-    # print(subprocess.call(['ls', '-l', '/root/.camel_tools/'] , shell=True))
 
 
-   
-    
- 
+label_list = list(pd.read_csv(f'{DIR_PATH}/model/ours/label_list.txt', header=None, index_col=0).T)
+label_map = { v:index for index, v in enumerate(label_list) }
+inv_label_map = {i: label for i, label in enumerate(label_list)}
 
-    # Predict the labels of a single sentence.
-    # The sentence must be pretokenized by whitespace and punctuation.
-    sentence = s.split()
 
-    labels = ner.predict_sentence(sentence)
-    res = ''
-    # Print the list of token-label pairs
-    for token, label in zip(sentence, labels):
+model = torch.load(destination ,map_location='cpu')
+model.eval()
+
+def predict_sent(sentences):
+
+    sentences = sentences.split('\n')
+    for s in sentences:
+        print( 'HERE', s)
+    # input_ids  = TOKENIZER.encode(sentences, return_tensors='pt')
+    out = TOKENIZER.batch_encode_plus(sentences, return_tensors='pt',padding=True)
+    result = ''
+
+    input_ids = out.input_ids
+    attention_mask = out.attention_mask
+
+    with torch.no_grad():
+        model.to('cpu')
+        output = model(input_ids,attention_mask)
+
+    label_indices = np.argmax(output[0].to('cpu').numpy(), axis=2)
+
+
+    tokens = [TOKENIZER.convert_ids_to_tokens(x.to('cpu').numpy()) for x in input_ids]
+
+    new_tokens, new_labels = [], []
+    for sent_tokens , sent_labels in zip(tokens, label_indices):
+        for token, label_idx  in zip(sent_tokens , sent_labels):
+            if token.startswith("##"):
+                new_tokens[-1] = new_tokens[-1] + token[2:]
+            elif token in TOKENIZER.all_special_tokens:
+                continue
+            else:
+                new_labels.append(inv_label_map[label_idx])
+                new_tokens.append(token)
+
+
+    for token, label in zip(new_tokens, new_labels):
         if(label == 'O'):
             continue
-        # print("{}\t{}".format(label, token))
-        s = f"{en_to_ar_camel[label]}     {label}      {token}"
-        res = res + s + '\n'
-    return res , labels , sentence
+        print("{}\t{}".format(label, token))
+        s = f"{en_to_ar[label]}     {label}      {token}"
+        result = result + s + '\n'
+    return result, new_labels, new_tokens
 
 
 
+print(predict_sent(" النجم محمد صلاح لاعب المنتخب المصري يعيش في مصر بالتحديد من المنصوره"))
