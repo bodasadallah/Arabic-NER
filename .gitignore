@@ -9,3 +9,5 @@ ner/full_model_v2.pt
 ner/test.txt
 *.pt
 model/
+youmna_ner.py
+
