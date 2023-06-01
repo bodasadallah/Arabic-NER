@@ -11,3 +11,4 @@ ner/test.txt
 model/
 youmna_ner.py
 
+data/

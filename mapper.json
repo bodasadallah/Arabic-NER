@@ -1,0 +1,61 @@
+{
+    "LOC": [
+        "Building-Grounds",
+        "Water-Body",
+        "Airport",
+        "Continent",
+        "Air",
+        "Land-Region-Natural",
+        "State-or-Province",
+        "Nation",
+        "County-or-District",
+        "Land",
+        "Population-Center",
+        "Water",
+        "Path",
+        "GPE-Cluster"
+    ],
+    "PERS": [
+        "Lawyer",
+        "Engineer",
+        "Religious_PER",
+        "Scientist",
+        "Artist",
+        "Athlete",
+        "Other_PER",
+        "Businessperson",
+        "Police"
+    ],
+    "ORG": [
+        "Media",
+        "Medical-Science",
+        "Politician",
+        "Government",
+        "Sports",
+        "Entertainment",
+        "Group",
+        "Non-Governmental",
+        "Religious_ORG",
+        "Educational"
+    ],
+    "MISC": [
+        "Food",
+        "Shooting",
+        "Plant",
+        "Book",
+        "Projectile",
+        "Hardware",
+        "Movie",
+        "Drug",
+        "Commercial",
+        "Software",
+        "Subarea-Facility",
+        "Exploding",
+        "Sound",
+        "Nuclear",
+        "Blunt",
+        "Sharp",
+        "Chemical"
+    ],
+    "EXCLUDED": []
+}
