@@ -1,0 +1,133 @@
+{'O': 0, 'B-PERS': 1, 'I-PERS': 2, 'B-ORG': 3, 'I-ORG': 4, 'B-MISC': 5, 'I-MISC': 6, 'B-LOC': 7, 'I-LOC': 8}
+{0: 'O', 1: 'B-PERS', 2: 'I-PERS', 3: 'B-ORG', 4: 'I-ORG', 5: 'B-MISC', 6: 'I-MISC', 7: 'B-LOC', 8: 'I-LOC'}
+BertForTokenClassification(
+  (bert): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(64000, 768, padding_idx=0)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0-11): 12 x BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+            (intermediate_act_fn): GELUActivation()
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+  )
+  (dropout): Dropout(p=0.1, inplace=False)
+  (classifier): Linear(in_features=768, out_features=9, bias=True)
+)
+Epoch 1/10
+----------
+  0%|          | 0/249 [00:00<?, ?it/s]
+26.731612224131823
+Train loss 0.10735587238607158
+  0%|          | 0/58 [00:00<?, ?it/s]
+Eval loss: 0.13205992064342417
+Eval Metrics:  {'accuracy_score': 0.9691889080068825, 'precision': 0.8320472083522469, 'recall': 0.8028909329829172, 'f1': 0.8172090949621044}
+--------------------------------------------------------------------
+Epoch 2/10
+----------
+  0%|          | 0/249 [00:00<?, ?it/s]
+9.363343317527324
+Train loss 0.03760378842380451
+  0%|          | 0/58 [00:00<?, ?it/s]
+Eval loss: 0.12956846396213975
+Eval Metrics:  {'accuracy_score': 0.9704693689728302, 'precision': 0.828597203428056, 'recall': 0.8046430135786247, 'f1': 0.8164444444444445}
+--------------------------------------------------------------------
+Epoch 3/10
+----------
+  0%|          | 0/249 [00:00<?, ?it/s]
+4.854475425439887
+Train loss 0.01949588524273047
+  0%|          | 0/58 [00:00<?, ?it/s]
+Eval loss: 0.14467193272992454
+Eval Metrics:  {'accuracy_score': 0.9703093113520868, 'precision': 0.8274157303370786, 'recall': 0.806395094174332, 'f1': 0.8167701863354035}
+--------------------------------------------------------------------
+Epoch 4/10
+----------
+  0%|          | 0/249 [00:00<?, ?it/s]
+2.7423934474936686
+Train loss 0.011013628303187424
+  0%|          | 0/58 [00:00<?, ?it/s]
+Eval loss: 0.16108882652017578
+Eval Metrics:  {'accuracy_score': 0.9706294265935737, 'precision': 0.8419833178869324, 'recall': 0.7958826106000876, 'f1': 0.8182841702319298}
+--------------------------------------------------------------------
+Epoch 5/10
+----------
+  0%|          | 0/249 [00:00<?, ?it/s]
+1.5339297510799952
+Train loss 0.006160360446104398
+  0%|          | 0/58 [00:00<?, ?it/s]
+Eval loss: 0.17691369489606085
+Eval Metrics:  {'accuracy_score': 0.9710295706454324, 'precision': 0.8426605504587156, 'recall': 0.8046430135786247, 'f1': 0.8232130853685861}
+--------------------------------------------------------------------
+Epoch 6/10
+----------
+  0%|          | 0/249 [00:00<?, ?it/s]
+0.7772010542757926
+Train loss 0.0031212893746015765
+  0%|          | 0/58 [00:00<?, ?it/s]
+Eval loss: 0.19210317435449567
+Eval Metrics:  {'accuracy_score': 0.9723900604217518, 'precision': 0.8431992769995481, 'recall': 0.8173455978975033, 'f1': 0.8300711743772242}
+--------------------------------------------------------------------
+Epoch 7/10
+----------
+  0%|          | 0/249 [00:00<?, ?it/s]
+0.43985010801407043
+Train loss 0.0017664662972452629
+  0%|          | 0/58 [00:00<?, ?it/s]
+Eval loss: 0.2020420029374032
+Eval Metrics:  {'accuracy_score': 0.9720699451802649, 'precision': 0.8509373571101966, 'recall': 0.8151554971528691, 'f1': 0.8326621923937361}
+--------------------------------------------------------------------
+Epoch 8/10
+----------
+  0%|          | 0/249 [00:00<?, ?it/s]
+0.2850438938476145
+Train loss 0.0011447545937655203
+  0%|          | 0/58 [00:00<?, ?it/s]
+Eval loss: 0.2190267128291829
+Eval Metrics:  {'accuracy_score': 0.9715097435076627, 'precision': 0.844179651695692, 'recall': 0.8068331143232589, 'f1': 0.8250839865621501}
+--------------------------------------------------------------------
+Epoch 9/10
+----------
+  0%|          | 0/249 [00:00<?, ?it/s]
+0.25878680941968923
+Train loss 0.00103930445550076
+  0%|          | 0/58 [00:00<?, ?it/s]
+Eval loss: 0.20460230767213064
+Eval Metrics:  {'accuracy_score': 0.972029930775079, 'precision': 0.8420342034203421, 'recall': 0.8195356986421375, 'f1': 0.8306326304106549}
+--------------------------------------------------------------------
+Epoch 10/10
+----------
+  0%|          | 0/249 [00:00<?, ?it/s]
+0.15981869075767463
+Train loss 0.0006418421315569263
+  0%|          | 0/58 [00:00<?, ?it/s]
+Eval loss: 0.20995968904603143
+Eval Metrics:  {'accuracy_score': 0.9723100316113801, 'precision': 0.8433138226024314, 'recall': 0.8204117389399912, 'f1': 0.8317051509769093}
+--------------------------------------------------------------------
