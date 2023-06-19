@@ -6,7 +6,7 @@ We managed to made a model based on Arabert to support 50 entities.
 ## Paper
 Here's the paper that contains all the details for our model, our approach, and the training results 
 
-- [ANER Paper](https://drive.google.com/file/d/1cNnKf-jS-3sjBXF2b0rkh517z9EzFFT4/view?usp=sharing)
+
 
 
 # Usage 
